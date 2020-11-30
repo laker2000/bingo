@@ -14,10 +14,10 @@ public class Test01_GET {
     @Test
     void test_01(){
 
-        Response response = get("https://rbaskets.in/api/version");
+        Response response = get("http://127.0.0.1:55555/api/version");
 
         given()
-            .get("https://rbaskets.in/api/version")
+            .get("http://127.0.0.1:55555/api/version")
         .then()
             .body("name", equalTo("request-baskets"));
 
@@ -37,7 +37,7 @@ public class Test01_GET {
     void Test02_GET(){
         //bolja metoda jer stavlja minimalan i konkretan errorTrace
         given()
-            .get("https://rbaskets.in/api/version")
+            .get("http://127.0.0.1:55555/api/version")
         .then()
             .statusCode(200)
             .body("source_code", equalTo("https://github.com/darklynx/request-baskets"));
