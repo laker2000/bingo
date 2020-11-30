@@ -4,4 +4,4 @@ sudo tar -C . -xvzf go1.15.5.linux-amd64.tar.gz
 
 export  PATH=$PATH:/usr/local/go/bin
 
-go version
+~/go/bin/./request-baskets 2>&1 | tee kkk.txt

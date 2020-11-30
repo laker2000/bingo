@@ -1,16 +1,10 @@
-matrix:
-  include:
-    - language: java
-      before_script:
-        - mvn -v
-      script:
-        - mvn clean verify
-
-    - language: go
-      before_script:
-        - pwd
-      script:
-        - ls -ltra
+language: java
+os:
+  - linux
+  - osx
+sudo: false # faster builds
+before_script: ./before_script_actions.sh
+script: mvn clean verify
 
 notifications:
   slack: effortel-group:P1e0Xos5vRW2rV7Unvyasaqe
