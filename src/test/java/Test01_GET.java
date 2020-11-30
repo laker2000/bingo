@@ -37,7 +37,7 @@ public class Test01_GET {
     void Test02_GET(){
         //bolja metoda jer stavlja minimalan i konkretan errorTrace
         given()
-            .get("http://127.0.0.1:55555/api/version")
+            .get("http://128.0.0.1:55555/api/version")
         .then()
             .statusCode(200)
             .body("source_code", equalTo("https://github.com/darklynx/request-baskets"));
