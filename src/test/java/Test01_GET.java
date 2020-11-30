@@ -25,6 +25,7 @@ public class Test01_GET {
 
         int responseStatusCode = response.statusCode();
 
+
         long responseTime = response.getTime();
 
 
