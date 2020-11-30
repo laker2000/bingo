@@ -10,4 +10,4 @@ go get github.com/darklynx/request-baskets
 
 ls ~/go/bin/./request-baskets
 chmod 777 ~/go/bin/./request-baskets
-~/go/bin/./request-baskets 2>&1 | tee kkk.txt &
+~/go/bin/./request-baskets 2>&1 | grep token | sed 's/^.*: //' | tee kkk.txt &
