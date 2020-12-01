@@ -1,3 +1,4 @@
+package tests.api;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -31,8 +32,8 @@ public class Test01_GET {
 
         Assert.assertEquals(responseStatusCode, 200);
 
-
     }
+
     @Test()
     void Test02_GET(){
         //bolja metoda jer stavlja minimalan i konkretan errorTrace
