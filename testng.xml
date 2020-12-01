@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Test Request Basket API" verbose="1">
+    <test name="Regression">
+        <classes>
+            <class name="tests.api.service.TestService"/>
+            <class name="tests.api.baskets.TestBaskets"/>
+            <class name="tests.api.responses.TestResponses"/>
+            <class name="tests.api.requests.TestRequests"/>
+        </classes>
+    </test> <!-- Test -->
+</suite> <!-- Suite -->
