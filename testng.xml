@@ -3,10 +3,10 @@
 <suite name="Test Request Basket API" verbose="1">
     <test name="Regression">
         <classes>
-            <class name="tests.api.service.TestService"/>
+<!--            <class name="tests.api.service.TestService"/>-->
             <class name="tests.api.baskets.TestBaskets"/>
-            <class name="tests.api.responses.TestResponses"/>
-            <class name="tests.api.requests.TestRequests"/>
+<!--            <class name="tests.api.responses.TestResponses"/>-->
+<!--            <class name="tests.api.requests.TestRequests"/>-->
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->

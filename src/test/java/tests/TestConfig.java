@@ -13,10 +13,13 @@ public class TestConfig {
     protected static String version;
     protected static String stats;
     protected static String baskets;
+    protected static String basketByName;
     protected static String responses;
     protected static String requests;
 
     protected static String test_config_file;
+    protected static String ref_basket_name;
+    protected static String ref_basket_token;
 
 
     @BeforeTest
@@ -24,6 +27,7 @@ public class TestConfig {
 
         version = "/version";
         baskets = "/baskets";
+        basketByName = "/baskets/{name}";
         stats = "/stats";
         responses = "/responses";
         requests = "/requests";

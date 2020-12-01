@@ -10,7 +10,7 @@ import tests.TestConfig;
 public class TestService extends TestConfig {
 
     @Test
-    public void test_service_get_version()
+    public void testServiceGetVersion()
     {
         when()
             .get(version)
@@ -18,6 +18,9 @@ public class TestService extends TestConfig {
             .statusCode(200)
         .and()
             .body("name", equalTo("request-baskets"))
+            .body("version", equalTo("n/a"))
+            .body("commit", equalTo("n/a"))
+            .body("commit_short", equalTo("n/a"))
             .body("source_code", equalTo("https://github.com/darklynx/request-baskets"))
         .and()
             .log()
