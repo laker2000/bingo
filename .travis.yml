@@ -1,6 +1,5 @@
 language: java
 os:
-  - linux
   - osx
 sudo: true
 before_script: sudo ./before_script_actions.sh
