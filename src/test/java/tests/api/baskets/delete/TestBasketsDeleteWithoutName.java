@@ -20,7 +20,7 @@ public class TestBasketsDeleteWithoutName extends TestConfig {
      *
      * 1. Create a basket
      * 2. Assert that basket is created
-     * 3. Try to delete a given basket
+     * 3. Try to delete basket without name path parameter
      * 4. Assert that 404 code is received
      *
      * */
@@ -48,7 +48,7 @@ public class TestBasketsDeleteWithoutName extends TestConfig {
         assertThat(postResponse.statusCode(), is(200));
         assertThat(postResponse.getBody().jsonPath().get("capacity"), is(321));
 
-        // 3. Try to delete a given basket
+        //3. Try to delete basket without name path parameter
         builder = new RequestSpecBuilder();
         builder.addHeader("Authorization", serviceToken);
         requestSpec = builder.build();

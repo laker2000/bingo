@@ -14,7 +14,7 @@ import static org.hamcrest.Matchers.is;
 public class TestBasketsDeleteWrongToken extends TestConfig {
 
     /**
-     * Scenario: Check deletion of basket when using wrong basket_token for auth
+     * Scenario: Check deletion of basket when using wrong auth token
      *
      * Test steps:
      *
