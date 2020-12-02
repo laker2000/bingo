@@ -6,7 +6,9 @@
 <!--            <class name="tests.api.service.TestService"/>-->
             <class name="tests.api.baskets.TestBaskets"/>
             <class name="tests.api.baskets.delete.TestBasketsDelete"/>
-            <class name="tests.api.baskets.delete.TestBasketsDeleteUnauthorized"/>
+            <class name="tests.api.baskets.delete.TestBasketsDeleteWithoutName"/>
+            <class name="tests.api.baskets.delete.TestBasketsDeleteWithoutToken"/>
+            <class name="tests.api.baskets.delete.TestBasketsDeleteWrongName"/>
             <class name="tests.api.baskets.delete.TestBasketsDeleteWrongToken"/>
 <!--            <class name="tests.api.responses.TestResponses"/>-->
 <!--            <class name="tests.api.requests.TestRequests"/>-->

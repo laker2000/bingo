@@ -11,59 +11,54 @@ import java.util.HashMap;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-public class TestBasketsDelete extends TestConfig {
+public class TestBasketsDeleteWrongName extends TestConfig {
 
     /**
-     * Scenario: Check deletion of a basket
+     * Scenario: Check deletion of a basket without desired basket name in the path
      *
      * Test steps:
      *
      * 1. Create a basket
      * 2. Assert that basket is created
-     * 3. Delete a given basket
-     * 4. Assert that given basket is deleted
+     * 3. Try to delete a given basket
+     * 4. Assert that 400 code is received
      *
      * */
     @Test
-    public void testBasketDelete(){
+    public void testBasketsDeleteWrongName(){
         // Arrange
         String basketName = RandomStringUtils.randomAlphanumeric(10);
+        String wrongBasketName = "I do not exist";
 
         RequestSpecBuilder builder = new RequestSpecBuilder();
         builder.addPathParam("name", basketName);
         builder.addHeader("Authorization", serviceToken);
-
         HashMap<String, Object> basketContent = new HashMap<>();
-        basketContent.put("forward_url", "https://nba.com");
-        basketContent.put("proxy_response", true);
-        basketContent.put("insecure_tls", true);
-        basketContent.put("expand_path", true);
         basketContent.put("capacity", 321);
 
         // 1. Create a basket
         var requestSpec = builder.build();
         var request = RestAssured.given().spec(requestSpec);
         request.body(basketContent);
-
         var postResponse = request.post(basketByName);
+
         assertThat(postResponse.statusCode(), is(201));
 
         // 2. Assert that basket is created
         postResponse = request.get(basketByName);
         assertThat(postResponse.statusCode(), is(200));
-        assertThat(postResponse.getBody().jsonPath().get("forward_url"), is("https://nba.com"));
-        assertThat(postResponse.getBody().jsonPath().get("proxy_response"), is(true));
-        assertThat(postResponse.getBody().jsonPath().get("insecure_tls"), is(true));
-        assertThat(postResponse.getBody().jsonPath().get("expand_path"), is(true));
         assertThat(postResponse.getBody().jsonPath().get("capacity"), is(321));
 
-        // 3. Delete a given basket
+        // 3. Try to delete a given basket
+        builder = new RequestSpecBuilder();
+        builder.addHeader("Authorization", serviceToken);
+        builder.addPathParam("name", wrongBasketName);
+        requestSpec = builder.build();
+        request = RestAssured.given().spec(requestSpec);
         postResponse = request.delete(basketByName);
-        assertThat(postResponse.statusCode(), is(204));
 
-        // 4. Assert that given basket is deleted
-        postResponse = request.get(basketByName);
-        assertThat(postResponse.statusCode(), is(404));
+        // 4. Assert that 400 code is received
+        assertThat(postResponse.statusCode(), is(400));
 
     }
 }

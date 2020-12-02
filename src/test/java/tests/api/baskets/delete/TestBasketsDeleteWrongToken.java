@@ -42,7 +42,6 @@ public class TestBasketsDeleteWrongToken extends TestConfig {
         basketContent.put("expand_path", true);
         basketContent.put("capacity", 321);
 
-
         var requestSpec = builder.build();
         var request = RestAssured.given().spec(requestSpec);
 
@@ -50,24 +49,20 @@ public class TestBasketsDeleteWrongToken extends TestConfig {
         var postResponse = request.post(basketByName);
         assertThat(postResponse.statusCode(), is(201));
 
-
         // 2. Assert that basket is created
-        builder.addPathParam("name", basketName);
         postResponse = request.get(basketByName);
         assertThat(postResponse.statusCode(), is(200));
         assertThat(postResponse.getBody().jsonPath().get("capacity"), is(321));
 
         // 3. Try to delete a given basket with wrong service/basket token
-
         builder = new RequestSpecBuilder();
         builder.addPathParam("name", basketName);
         builder.addHeader("Authorization", token);
-
         requestSpec = builder.build();
         request = RestAssured.given().spec(requestSpec);
+        postResponse = request.delete(basketByName);
 
         // 4. Assert that 401 status code is received
-        postResponse = request.delete(basketByName);
         assertThat(postResponse.statusCode(), is(401));
 
 
