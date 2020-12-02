@@ -12,32 +12,9 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class TestBaskets extends TestConfig {
 
-    // note: pada posle prvog run-a, jer se stanje menja..resi to
-//    @Test()
-//    public void testBasketsGetStatsEmptyState()
-//    {
-//        given()
-//            .headers("Authorization", serviceToken)
-//            .get(stats)
-//        .then()
-//            .statusCode(200)
-//        .and()
-//            .body("baskets_count", equalTo(0))
-//            .body("empty_baskets_count", equalTo(0))
-//            .body("requests_count", equalTo(0))
-//            .body("requests_total_count", equalTo(0))
-//            .body("max_basket_size", equalTo(0))
-//            .body("avg_basket_size", equalTo(0))
-//            .body("top_baskets_size", equalTo(null))
-//            .body("top_baskets_recent", equalTo(null))
-//        .and()
-//            .log()
-//            .all();
-//
-//    }
 
-    @Test()
-    public void testBasketsPost()
+    @Test(priority = 1)
+    public void testPostBasket()
     {
        ref_basket_name = RandomStringUtils.randomAlphanumeric(10);
 
@@ -48,7 +25,45 @@ public class TestBaskets extends TestConfig {
        .when()
            .post(basketByName)
        .then()
-           .statusCode(201);
+           .statusCode(201).log().all();
 
     }
+
+    @Test(priority = 2)
+    public void testGetBasketSettings()
+    {
+        given()
+            .headers("Authorization", serviceToken)
+            .pathParam("name", ref_basket_name)
+        .when()
+            .get(basketByName)
+        .then()
+            .statusCode(200).log().all();
+    }
+
+
+    //@Test() - Uncomment if you want to test empty state environment
+    public void testBasketsGetStatsEmptyState()
+    {
+        given()
+            .headers("Authorization", serviceToken)
+            .get(stats)
+        .then()
+            .statusCode(200)
+        .and()
+            .body("baskets_count", equalTo(0))
+            .body("empty_baskets_count", equalTo(0))
+            .body("requests_count", equalTo(0))
+            .body("requests_total_count", equalTo(0))
+            .body("max_basket_size", equalTo(0))
+            .body("avg_basket_size", equalTo(0))
+            .body("top_baskets_size", equalTo(null))
+            .body("top_baskets_recent", equalTo(null))
+        .and()
+            .log()
+            .all();
+
+    }
+
+
 }
