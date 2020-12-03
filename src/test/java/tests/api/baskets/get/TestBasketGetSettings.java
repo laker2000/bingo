@@ -45,9 +45,15 @@ public class TestBasketGetSettings extends TestConfig {
         request.body(basketContent);
 
         var response = request.post(basketByName);
-
+        String basketToken = response.body().jsonPath().get("token");
         // 3. Assert basket settings response schema
         assertThat(response.statusCode(), is(201));
+
+        builder = new RequestSpecBuilder();
+        builder.addPathParam("name", basketName);
+        builder.addHeader("Authorization", basketToken);
+        requestSpec = builder.build();
+        request = RestAssured.given().spec(requestSpec);
 
         response = request.get(basketByName);
         assertThat(response.statusCode(), is(200));
