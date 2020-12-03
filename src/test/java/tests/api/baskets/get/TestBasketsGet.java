@@ -22,7 +22,7 @@ public class TestBasketsGet extends TestConfig {
      * 2. Create a given basket
      * 3. Assert that basket is created
      * 4. Execute get method for a given basket
-     * 5. Assert that given basket is returned
+     * 5. Assert that query parameter name exist in response
      *
      * */
     @Test
@@ -63,7 +63,7 @@ public class TestBasketsGet extends TestConfig {
         var getResponse  = request.get(baskets);
         assertThat(getResponse.statusCode(), is(200));
 
-        // 5. Assert that basket details
+        // 5. Assert that query parameter name exist in response
         assertThat(getResponse.getBody().asString().contains(basketName), is(true));
 
     }
