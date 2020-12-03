@@ -41,13 +41,13 @@ public class TestBasketGetStats extends TestConfig {
         var request = RestAssured.given().spec(requestSpec);
         request.body(basketContent);
 
-        var postResponse = request.post(basketByName);
-        assertThat(postResponse.statusCode(), is(201));
+        var response = request.post(basketByName);
+        assertThat(response.statusCode(), is(201));
 
         // 3. Assert that basket is created
-        postResponse = request.get(basketByName);
-        assertThat(postResponse.statusCode(), is(200));
-        assertThat(postResponse.getBody().jsonPath().get("forward_url"), is("https://nba.com"));
+        response = request.get(basketByName);
+        assertThat(response.statusCode(), is(200));
+        assertThat(response.getBody().jsonPath().get("forward_url"), is("https://nba.com"));
 
         // 4. Get desired basket using query parameter
         builder = new RequestSpecBuilder();
