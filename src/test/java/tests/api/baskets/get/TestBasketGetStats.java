@@ -12,6 +12,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 public class TestBasketGetStats extends TestConfig {
+
     /**
      * Scenario: Check GET /baskets endpoint for desired basket
      *
