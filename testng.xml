@@ -10,6 +10,14 @@
             <class name="tests.api.baskets.delete.TestBasketsDeleteWithoutToken"/>
             <class name="tests.api.baskets.delete.TestBasketsDeleteWrongName"/>
             <class name="tests.api.baskets.delete.TestBasketsDeleteWrongToken"/>
+
+            <class name="tests.api.baskets.post.TestBasketsPost"/>
+            <class name="tests.api.baskets.post.TestBasketsPostLengthOfName"/>
+            <class name="tests.api.baskets.post.TestBasketsPostNameDuplication"/>
+            <class name="tests.api.baskets.post.TestBasketsPostWithoutName"/>
+            <class name="tests.api.baskets.post.TestBasketsPostWithoutToken"/>
+            <class name="tests.api.baskets.post.TestBasketsPostWrongConfiguration"/>
+            <class name="tests.api.baskets.post.TestBasketsPostWrongName"/>
 <!--            <class name="tests.api.responses.TestResponses"/>-->
 <!--            <class name="tests.api.requests.TestRequests"/>-->
         </classes>
