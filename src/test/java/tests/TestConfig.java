@@ -1,6 +1,7 @@
 package tests;
 
 import io.restassured.RestAssured;
+import io.restassured.builder.RequestSpecBuilder;
 import org.testng.annotations.BeforeTest;
 
 import java.io.*;
@@ -68,6 +69,14 @@ public class TestConfig {
         }
 
         RestAssured.baseURI = "http://"+baseUri.trim().concat("/api");
+    }
+
+    //Note: Use in next iteration, when removing code duplication
+    public RequestSpecBuilder prepareRequestBuilder(String basketName) {
+        RequestSpecBuilder builder = new RequestSpecBuilder();
+        builder.addPathParam("name", basketName);
+        builder.addHeader("Authorization", serviceToken);
+        return builder;
     }
 
 }
