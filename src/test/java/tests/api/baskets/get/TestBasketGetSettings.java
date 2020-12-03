@@ -20,9 +20,7 @@ public class TestBasketGetSettings extends TestConfig {
      *
      * 1. Arrange a basket for creation
      * 2. Create a given basket
-     * 3. Assert that basket is created
-     * 4. Execute get method for a given basket
-     * 5. Assert that given basket is returned
+     * 3. Assert basket settings response schema
      *
      * */
     @Test
@@ -47,24 +45,17 @@ public class TestBasketGetSettings extends TestConfig {
         request.body(basketContent);
 
         var postResponse = request.post(basketByName);
+
+        // 3. Assert basket settings response schema
         assertThat(postResponse.statusCode(), is(201));
 
-        // 3. Assert that basket is created
         postResponse = request.get(basketByName);
         assertThat(postResponse.statusCode(), is(200));
         assertThat(postResponse.getBody().jsonPath().get("forward_url"), is("https://nba.com"));
-
-        // 4. Get desired basket using query parameter
-        builder = new RequestSpecBuilder();
-        builder.addQueryParam("q", basketName);
-        builder.addHeader("Authorization", serviceToken);
-        requestSpec = builder.build();
-        request = RestAssured.given().spec(requestSpec);
-        var getResponse  = request.get(baskets);
-        assertThat(getResponse.statusCode(), is(200));
-
-        // 5. Assert that basket details
-        assertThat(getResponse.getBody().asString().contains(basketName), is(true));
+        assertThat(postResponse.getBody().jsonPath().get("proxy_response"), is(true));
+        assertThat(postResponse.getBody().jsonPath().get("insecure_tls"), is(true));
+        assertThat(postResponse.getBody().jsonPath().get("expand_path"), is(true));
+        assertThat(postResponse.getBody().jsonPath().get("capacity"), is(321));
 
     }
 
