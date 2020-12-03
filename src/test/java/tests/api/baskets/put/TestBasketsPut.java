@@ -1,10 +1,9 @@
-package tests.api.baskets.post;
+package tests.api.baskets.put;
 
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.annotations.Test;
-
 import tests.TestConfig;
 
 import java.util.HashMap;
@@ -12,22 +11,20 @@ import java.util.HashMap;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-public class TestBasketsPostNameDuplication extends TestConfig {
+public class TestBasketsPut extends TestConfig {
 
     /**
-     * Scenario: Check basket duplication
+     * Scenario: Check creation of a basket
      *
      * Test steps:
      *
-     * 1. Arrange a basket for creation
-     * 2. Create a given basket
-     * 3. Assert that basket is created
-     * 4. Try to create the same basket again
-     * 5. Assert that 409 code is received, Assert response message
+     * 1. Create a basket with desired settings
+     * 2. Change basket settings
+     * 3. Assert that basket settings changes are applied
      *
      * */
     @Test
-    public void testBasketsPostNameDuplication(){
+    public void testBasketsPut(){
         // 1. Arrange a basket for creation
         String basketName = RandomStringUtils.randomAlphanumeric(10);
 
@@ -59,11 +56,26 @@ public class TestBasketsPostNameDuplication extends TestConfig {
         assertThat(response.getBody().jsonPath().get("expand_path"), is(true));
         assertThat(response.getBody().jsonPath().get("capacity"), is(321));
 
-        // 5. Assert that 409 code is received, Assert response message
-        String expectedMessage = String.format("Basket with name '%s' already exists\n", basketName);
-        response = request.post(basketByName);
-        assertThat(response.statusCode(), is(409));
-        assertThat(response.body().asString(), is(expectedMessage));
+        basketContent = new HashMap<>();
+        basketContent.put("forward_url", "https://nba.org");
+        basketContent.put("proxy_response", false);
+        basketContent.put("insecure_tls", false);
+        basketContent.put("expand_path", false);
+        basketContent.put("capacity", 123);
+
+        request = RestAssured.given().spec(requestSpec);
+        request.body(basketContent);
+
+        response = request.put(basketByName);
+        assertThat(response.statusCode(), is(204));
+
+        response = request.get(basketByName);
+        assertThat(response.statusCode(), is(200));
+        assertThat(response.getBody().jsonPath().get("forward_url"), is("https://nba.org"));
+        assertThat(response.getBody().jsonPath().get("proxy_response"), is(false));
+        assertThat(response.getBody().jsonPath().get("insecure_tls"), is(false));
+        assertThat(response.getBody().jsonPath().get("expand_path"), is(false));
+        assertThat(response.getBody().jsonPath().get("capacity"), is(123));
 
     }
 

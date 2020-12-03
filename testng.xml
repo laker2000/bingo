@@ -3,13 +3,17 @@
 <suite name="Test Request Basket API" verbose="1">
     <test name="Regression">
         <classes>
-<!--            <class name="tests.api.service.TestService"/>-->
 
             <class name="tests.api.baskets.delete.TestBasketsDelete"/>
             <class name="tests.api.baskets.delete.TestBasketsDeleteWithoutName"/>
             <class name="tests.api.baskets.delete.TestBasketsDeleteWithoutToken"/>
             <class name="tests.api.baskets.delete.TestBasketsDeleteWrongName"/>
             <class name="tests.api.baskets.delete.TestBasketsDeleteWrongToken"/>
+
+            <class name="tests.api.baskets.get.TestBasketGetSettings"/>
+            <class name="tests.api.baskets.get.TestBasketGetStats"/>
+            <class name="tests.api.baskets.get.TestBasketGetWrongToken"/>
+            <class name="tests.api.baskets.get.TestBasketsGet"/>
 
             <class name="tests.api.baskets.post.TestBasketsPost"/>
             <class name="tests.api.baskets.post.TestBasketsPostLengthOfName"/>
@@ -18,8 +22,7 @@
             <class name="tests.api.baskets.post.TestBasketsPostWithoutToken"/>
             <class name="tests.api.baskets.post.TestBasketsPostWrongConfiguration"/>
             <class name="tests.api.baskets.post.TestBasketsPostWrongName"/>
-<!--            <class name="tests.api.responses.TestResponses"/>-->
-<!--            <class name="tests.api.requests.TestRequests"/>-->
+
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->

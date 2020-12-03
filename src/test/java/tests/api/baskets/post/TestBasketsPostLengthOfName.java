@@ -34,7 +34,7 @@ public class TestBasketsPostLengthOfName extends TestConfig {
                 RandomStringUtils.randomAlphanumeric(2),
                 RandomStringUtils.randomAlphanumeric(249),
                 RandomStringUtils.randomAlphanumeric(250),
-                "-" + RandomStringUtils.randomNumeric(1), // yep, you can call it e.g:  -7
+                "-" + RandomStringUtils.randomNumeric(1), // yep, you can call it e.g: -89
                 RandomStringUtils.randomNumeric(1),
                 RandomStringUtils.randomNumeric(2),
                 RandomStringUtils.randomNumeric(249),
@@ -58,7 +58,7 @@ public class TestBasketsPostLengthOfName extends TestConfig {
 
             // 3. Assert that basket is created
             assertThat(postResponse.statusCode(), is(201));
-            System.out.println();
+
         }
 
     }

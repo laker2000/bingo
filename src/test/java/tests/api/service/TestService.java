@@ -21,11 +21,7 @@ public class TestService extends TestConfig {
             .body("version", equalTo("n/a"))
             .body("commit", equalTo("n/a"))
             .body("commit_short", equalTo("n/a"))
-            .body("source_code", equalTo("https://github.com/darklynx/request-baskets"))
-        .and()
-            .log()
-            .all();
-
+            .body("source_code", equalTo("https://github.com/darklynx/request-baskets"));
 
     }
 

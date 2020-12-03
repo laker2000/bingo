@@ -45,17 +45,17 @@ public class TestBasketsPost extends TestConfig {
         var request = RestAssured.given().spec(requestSpec);
         request.body(basketContent);
 
-        var postResponse = request.post(basketByName);
-        assertThat(postResponse.statusCode(), is(201));
+        var response = request.post(basketByName);
+        assertThat(response.statusCode(), is(201));
 
         // 3. Assert that basket is created
-        postResponse = request.get(basketByName);
-        assertThat(postResponse.statusCode(), is(200));
-        assertThat(postResponse.getBody().jsonPath().get("forward_url"), is("https://nba.com"));
-        assertThat(postResponse.getBody().jsonPath().get("proxy_response"), is(true));
-        assertThat(postResponse.getBody().jsonPath().get("insecure_tls"), is(true));
-        assertThat(postResponse.getBody().jsonPath().get("expand_path"), is(true));
-        assertThat(postResponse.getBody().jsonPath().get("capacity"), is(321));
+        response = request.get(basketByName);
+        assertThat(response.statusCode(), is(200));
+        assertThat(response.getBody().jsonPath().get("forward_url"), is("https://nba.com"));
+        assertThat(response.getBody().jsonPath().get("proxy_response"), is(true));
+        assertThat(response.getBody().jsonPath().get("insecure_tls"), is(true));
+        assertThat(response.getBody().jsonPath().get("expand_path"), is(true));
+        assertThat(response.getBody().jsonPath().get("capacity"), is(321));
 
     }
 

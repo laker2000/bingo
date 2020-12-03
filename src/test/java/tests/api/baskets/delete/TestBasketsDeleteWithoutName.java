@@ -39,24 +39,24 @@ public class TestBasketsDeleteWithoutName extends TestConfig {
         var requestSpec = builder.build();
         var request = RestAssured.given().spec(requestSpec);
         request.body(basketContent);
-        var postResponse = request.post(basketByName);
+        var response = request.post(basketByName);
 
-        assertThat(postResponse.statusCode(), is(201));
+        assertThat(response.statusCode(), is(201));
 
         // 2. Assert that basket is created
-        postResponse = request.get(basketByName);
-        assertThat(postResponse.statusCode(), is(200));
-        assertThat(postResponse.getBody().jsonPath().get("capacity"), is(321));
+        response = request.get(basketByName);
+        assertThat(response.statusCode(), is(200));
+        assertThat(response.getBody().jsonPath().get("capacity"), is(321));
 
         //3. Try to delete basket without name path parameter
         builder = new RequestSpecBuilder();
         builder.addHeader("Authorization", serviceToken);
         requestSpec = builder.build();
         request = RestAssured.given().spec(requestSpec);
-        postResponse = request.delete();
+        response = request.delete();
 
         // 4. Assert that 404 code is received
-        assertThat(postResponse.statusCode(), is(404));
+        assertThat(response.statusCode(), is(404));
 
 
     }
