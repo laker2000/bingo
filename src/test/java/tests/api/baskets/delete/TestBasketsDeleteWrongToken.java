@@ -28,7 +28,7 @@ public class TestBasketsDeleteWrongToken extends TestConfig {
     public void testBasketDeleteWrongToken(){
 
         // 1. Create a basket
-        String token = "wrong one!";
+        String wrongToken = "wrong one!";
         String basketName = RandomStringUtils.randomAlphanumeric(10);
 
         RequestSpecBuilder builder = new RequestSpecBuilder();
@@ -57,7 +57,7 @@ public class TestBasketsDeleteWrongToken extends TestConfig {
         // 3. Try to delete a given basket with wrong service/basket token
         builder = new RequestSpecBuilder();
         builder.addPathParam("name", basketName);
-        builder.addHeader("Authorization", token);
+        builder.addHeader("Authorization", wrongToken);
         requestSpec = builder.build();
         request = RestAssured.given().spec(requestSpec);
         response = request.delete(basketByName);

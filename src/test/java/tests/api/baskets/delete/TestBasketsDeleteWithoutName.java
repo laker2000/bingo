@@ -40,8 +40,8 @@ public class TestBasketsDeleteWithoutName extends TestConfig {
         var request = RestAssured.given().spec(requestSpec);
         request.body(basketContent);
         var response = request.post(basketByName);
-
         assertThat(response.statusCode(), is(201));
+        String basketToken = response.body().jsonPath().get("token");
 
         // 2. Assert that basket is created
         response = request.get(basketByName);
@@ -50,7 +50,7 @@ public class TestBasketsDeleteWithoutName extends TestConfig {
 
         //3. Try to delete basket without name path parameter
         builder = new RequestSpecBuilder();
-        builder.addHeader("Authorization", serviceToken);
+        builder.addHeader("Authorization", basketToken);
         requestSpec = builder.build();
         request = RestAssured.given().spec(requestSpec);
         response = request.delete();

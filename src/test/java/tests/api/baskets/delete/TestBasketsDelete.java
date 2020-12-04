@@ -47,6 +47,7 @@ public class TestBasketsDelete extends TestConfig {
 
         var response = request.post(basketByName);
         assertThat(response.statusCode(), is(201));
+        String basketToken = response.body().jsonPath().get("token");
 
         // 2. Assert that basket is created
         response = request.get(basketByName);
@@ -58,6 +59,12 @@ public class TestBasketsDelete extends TestConfig {
         assertThat(response.getBody().jsonPath().get("capacity"), is(321));
 
         // 3. Delete a given basket
+        builder = new RequestSpecBuilder();
+        builder.addPathParam("name", basketName);
+        builder.addHeader("Authorization", basketToken);
+        requestSpec = builder.build();
+        request = RestAssured.given().spec(requestSpec);
+
         response = request.delete(basketByName);
         assertThat(response.statusCode(), is(204));
 

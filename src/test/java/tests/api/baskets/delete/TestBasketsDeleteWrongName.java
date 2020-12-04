@@ -41,8 +41,9 @@ public class TestBasketsDeleteWrongName extends TestConfig {
         var request = RestAssured.given().spec(requestSpec);
         request.body(basketContent);
         var response = request.post(basketByName);
-
         assertThat(response.statusCode(), is(201));
+
+        String basketToken = response.body().jsonPath().get("token");
 
         // 2. Assert that basket is created
         response = request.get(basketByName);
@@ -51,8 +52,8 @@ public class TestBasketsDeleteWrongName extends TestConfig {
 
         // 3. Try to delete a given basket
         builder = new RequestSpecBuilder();
-        builder.addHeader("Authorization", serviceToken);
         builder.addPathParam("name", wrongBasketName);
+        builder.addHeader("Authorization", basketToken);
         requestSpec = builder.build();
         request = RestAssured.given().spec(requestSpec);
         response = request.delete(basketByName);
