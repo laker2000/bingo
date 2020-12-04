@@ -19,8 +19,6 @@ public class TestConfig {
     protected static String requests;
 
     protected static String test_config_file;
-    protected static String ref_basket_name;
-    protected static String ref_basket_token;
 
 
     @BeforeTest
@@ -30,7 +28,7 @@ public class TestConfig {
         baskets = "/baskets";
         basketByName = "/baskets/{name}";
         stats = "/stats";
-        responses = "/responses";
+        responses = "/baskets/{name}/responses/{method}";
         requests = "/requests";
         test_config_file = "./test.config";
 
